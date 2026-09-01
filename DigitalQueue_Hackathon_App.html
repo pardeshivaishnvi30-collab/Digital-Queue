@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SmartQueue - Digital Queue System</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#eef4ff,#f8fbff);
+    color:#172033;
+}
+
+.app{
+    width:100%;
+    max-width:430px;
+    min-height:100vh;
+    margin:auto;
+    background:#ffffff;
+    box-shadow:0 0 30px rgba(0,0,0,0.08);
+    overflow:hidden;
+}
+
+/* HEADER */
+
+.header{
+    padding:22px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #edf0f5;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    background:#2563eb;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.logo h2{
+    font-size:20px;
+}
+
+.logo span{
+    color:#2563eb;
+}
+
+.status{
+    background:#e9f9ef;
+    color:#168344;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* HOME */
+
+.screen{
+    padding:25px 20px 30px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#2563eb,#4f8df7);
+    color:white;
+    border-radius:25px;
+    padding:28px 22px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 12px 25px rgba(37,99,235,0.22);
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    right:-40px;
+    top:-40px;
+}
+
+.hero h1{
+    font-size:28px;
+    line-height:1.2;
+    margin-bottom:10px;
+}
+
+.hero p{
+    font-size:14px;
+    line-height:1.6;
+    opacity:.9;
+}
+
+.hero-icon{
+    font-size:45px;
+    margin-bottom:12px;
+}
+
+.primary-btn{
+    width:100%;
+    border:none;
+    padding:16px;
+    border-radius:14px;
+    background:#ffffff;
+    color:#2563eb;
+    font-size:16px;
+    font-weight:bold;
+    margin-top:22px;
+    cursor:pointer;
+}
+
+.primary-btn:active,
+.blue-btn:active{
+    transform:scale(.98);
+}
+
+/* FEATURES */
+
+.section-title{
+    margin-top:28px;
+    margin-bottom:15px;
+    font-size:18px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px;
+}
+
+.feature{
+    padding:17px;
+    border:1px solid #edf0f5;
+    border-radius:17px;
+    background:#fff;
+}
+
+.feature-icon{
+    font-size:25px;
+    margin-bottom:10px;
+}
+
+.feature h3{
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.feature p{
+    color:#777;
+    font-size:12px;
+    line-height:1.4;
+}
+
+/* SERVICE SCREEN */
+
+.back{
+    border:none;
+    background:none;
+    font-size:15px;
+    color:#2563eb;
+    font-weight:bold;
+    cursor:pointer;
+    margin-bottom:20px;
+}
+
+.screen-title{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.screen-subtitle{
+    color:#777;
+    font-size:14px;
+    margin-bottom:25px;
+}
+
+.service-card{
+    border:1px solid #e8ecf3;
+    border-radius:17px;
+    padding:17px;
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.service-card:hover{
+    border-color:#2563eb;
+    background:#f7faff;
+}
+
+.service-icon{
+    width:45px;
+    height:45px;
+    border-radius:13px;
+    background:#eef4ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.service-card h3{
+    font-size:15px;
+}
+
+.service-card p{
+    font-size:12px;
+    color:#777;
+    margin-top:4px;
+}
+
+.arrow{
+    margin-left:auto;
+    color:#999;
+}
+
+/* TOKEN SCREEN */
+
+.token-main{
+    text-align:center;
+}
+
+.token-card{
+    margin-top:20px;
+    padding:30px 20px;
+    border-radius:25px;
+    background:linear-gradient(135deg,#eef4ff,#f7faff);
+    border:1px solid #dce8ff;
+}
+
+.small-label{
+    color:#777;
+    font-size:13px;
+}
+
+.token-number{
+    font-size:55px;
+    font-weight:800;
+    color:#2563eb;
+    margin:8px 0;
+    letter-spacing:2px;
+}
+
+.service-name{
+    font-weight:bold;
+    font-size:16px;
+}
+
+.active-badge{
+    display:inline-block;
+    margin-top:12px;
+    background:#e9f9ef;
+    color:#168344;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px;
+    margin-top:15px;
+}
+
+.info-box{
+    background:#f8f9fb;
+    border-radius:17px;
+    padding:18px 10px;
+}
+
+.info-box h2{
+    color:#172033;
+    font-size:24px;
+    margin-bottom:5px;
+}
+
+.info-box p{
+    color:#777;
+    font-size:12px;
+}
+
+/* CURRENT QUEUE */
+
+.queue-card{
+    margin-top:15px;
+    padding:20px;
+    border:1px solid #e8ecf3;
+    border-radius:18px;
+}
+
+.queue-title{
+    text-align:left;
+    font-size:15px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+.current{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#f7f9fc;
+    padding:14px;
+    border-radius:12px;
+}
+
+.current span:first-child{
+    color:#666;
+    font-size:13px;
+}
+
+.current-token{
+    font-size:21px;
+    font-weight:bold;
+    color:#2563eb;
+}
+
+.progress-area{
+    margin-top:18px;
+    text-align:left;
+}
+
+.progress-text{
+    display:flex;
+    justify-content:space-between;
+    font-size:12px;
+    color:#777;
+    margin-bottom:7px;
+}
+
+.progress{
+    height:8px;
+    background:#e9edf4;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:65%;
+    background:#2563eb;
+    border-radius:10px;
+}
+
+/* NOTE */
+
+.note{
+    margin-top:15px;
+    padding:14px;
+    background:#fff8e8;
+    color:#815b00;
+    border-radius:14px;
+    text-align:left;
+    font-size:12px;
+    line-height:1.5;
+}
+
+/* BUTTON */
+
+.blue-btn{
+    width:100%;
+    margin-top:18px;
+    padding:16px;
+    border:none;
+    border-radius:14px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    color:#aaa;
+    font-size:11px;
+    margin-top:25px;
+}
+
+/* HIDDEN */
+
+.hidden{
+    display:none;
+}
+
+
+<style>
+.role-switch{display:flex;gap:8px;padding:14px 20px 0}
+.role-switch button{flex:1;padding:10px;border:1px solid #dfe5ef;background:#fff;border-radius:12px;font-weight:700;cursor:pointer}
+.role-switch button.active{background:#2563eb;color:#fff;border-color:#2563eb}
+.admin-card{background:#f7f9fc;border:1px solid #e7ebf2;border-radius:18px;padding:18px;margin-bottom:14px}
+.admin-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:#fff;border-radius:14px;padding:14px 8px;text-align:center;border:1px solid #e9edf4}
+.stat b{display:block;font-size:22px;color:#2563eb}
+.stat span{font-size:11px;color:#777}
+.admin-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.admin-actions button{border:0;border-radius:12px;padding:13px;font-weight:700;cursor:pointer}
+.call{background:#2563eb;color:#fff}.complete{background:#e9f9ef;color:#168344}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(120px);background:#172033;color:#fff;padding:13px 18px;border-radius:14px;font-size:13px;opacity:0;transition:.3s;z-index:99;box-shadow:0 10px 25px rgba(0,0,0,.18)}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+</style>
+
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🎫
+            </div>
+
+            <h2>
+                Smart<span>Queue</span>
+            </h2>
+
+        </div>
+
+        <div class="status">
+            ● System Online
+        </div>
+
+    </div>
+
+
+
+<div class="role-switch">
+  <button id="studentTab" class="active" onclick="switchRole('student')">👨‍🎓 Student</button>
+  <button id="adminTab" onclick="switchRole('admin')">👨‍💼 Staff / Admin</button>
+</div>
+
+<div id="adminScreen" class="screen hidden">
+  <button class="back" onclick="switchRole('student')">← Student View</button>
+  <h1 class="screen-title">Queue Dashboard</h1>
+  <p class="screen-subtitle">Manage counters and call students in order.</p>
+
+  <div class="admin-card">
+    <div class="admin-stats">
+      <div class="stat"><b id="adminCurrent">A-001</b><span>Serving</span></div>
+      <div class="stat"><b id="adminWaiting">0</b><span>Waiting</span></div>
+      <div class="stat"><b id="adminNext">A-002</b><span>Next</span></div>
+    </div>
+  </div>
+
+  <div class="admin-card">
+    <div class="queue-title">Current Service</div>
+    <div class="current">
+      <span id="adminService">General Service</span>
+      <span class="current-token" id="adminToken">A-001</span>
+    </div>
+    <div class="admin-actions">
+      <button class="call" onclick="adminCallNext()">CALL NEXT →</button>
+      <button class="complete" onclick="adminComplete()">✓ COMPLETE</button>
+    </div>
+  </div>
+
+  <div class="admin-card">
+    <div class="queue-title">Live Waiting Tokens</div>
+    <div id="waitingList" style="line-height:2;color:#555;font-size:14px;">No students waiting yet.</div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+    <!-- HOME SCREEN -->
+
+    <div id="homeScreen" class="screen">
+
+        <div class="hero">
+
+            <div class="hero-icon">
+                ⚡
+            </div>
+
+            <h1>
+                Skip The Line.<br>
+                Save Your Time.
+            </h1>
+
+            <p>
+                Take a digital token and track your
+                queue in real-time without standing
+                in a physical line.
+            </p>
+
+            <button class="primary-btn"
+                    onclick="showServiceScreen()">
+
+                Get Digital Token →
+
+            </button>
+
+        </div>
+
+
+        <h2 class="section-title">
+            Why SmartQueue?
+        </h2>
+
+
+        <div class="features">
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Digital Token
+                </h3>
+
+                <p>
+                    Get your token directly from
+                    your phone.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    ⏱️
+                </div>
+
+                <h3>
+                    Save Time
+                </h3>
+
+                <p>
+                    No need to wait in long
+                    physical queues.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🔔
+                </div>
+
+                <h3>
+                    Smart Alerts
+                </h3>
+
+                <p>
+                    Know when your turn is
+                    approaching.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Live Status
+                </h3>
+
+                <p>
+                    Track the queue in
+                    real-time.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer">
+            SmartQueue • Digital Queue Management
+        </div>
+
+    </div>
+
+
+    <!-- SERVICE SCREEN -->
+
+    <div id="serviceScreen"
+         class="screen hidden">
+
+        <button class="back"
+                onclick="showHome()">
+
+            ← Back
+
+        </button>
+
+        <h1 class="screen-title">
+            Choose a Service
+        </h1>
+
+        <p class="screen-subtitle">
+            Select the service you need to get
+            your digital token.
+        </p>
+
+
+        <div class="service-card"
+             onclick="generateToken('General Service')">
+
+            <div class="service-icon">
+                🏢
+            </div>
+
+            <div>
+
+                <h3>
+                    General Service
+                </h3>
+
+                <p>
+                    General enquiries and services
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <div class="service-card"
+             onclick="generateToken('Document Verification')">
+
+            <div class="service-icon">
+                📄
+            </div>
+
+            <div>
+
+                <h3>
+                    Document Verification
+                </h3>
+
+                <p>
+                    Verify and submit documents
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <div class="service-card"
+             onclick="generateToken('Payment Counter')">
+
+            <div class="service-icon">
+                💳
+            </div>
+
+            <div>
+
+                <h3>
+                    Payment Counter
+                </h3>
+
+                <p>
+                    Bills and payment related work
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+
+        <div class="service-card"
+             onclick="generateToken('Enquiry')">
+
+            <div class="service-icon">
+                💬
+            </div>
+
+            <div>
+
+                <h3>
+                    Enquiry
+                </h3>
+
+                <p>
+                    Ask questions and get information
+                </p>
+
+            </div>
+
+            <div class="arrow">
+                ›
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TOKEN SCREEN -->
+
+    <div id="tokenScreen"
+         class="screen hidden token-main">
+
+        <button class="back"
+                onclick="showHome()">
+
+            ← Home
+
+        </button>
+
+
+        <h1 class="screen-title">
+            Your Digital Token
+        </h1>
+
+        <p class="screen-subtitle">
+            Keep this token and track your position.
+        </p>
+
+
+        <div class="token-card">
+
+            <div class="small-label">
+                YOUR TOKEN NUMBER
+            </div>
+
+            <div class="token-number"
+                 id="tokenNumber">
+
+                A-001
+
+            </div>
+
+            <div class="service-name"
+                 id="serviceName">
+
+                General Service
+
+            </div>
+
+            <div class="active-badge">
+                ● ACTIVE
+            </div>
+
+        </div>
+
+
+        <div class="info-grid">
+
+            <div class="info-box">
+
+                <h2 id="peopleAhead">
+                    7
+                </h2>
+
+                <p>
+                    People Ahead
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <h2 id="waitTime">
+                    21 min
+                </h2>
+
+                <p>
+                    Estimated Wait
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="queue-card">
+
+            <div class="queue-title">
+                🔴 Live Queue Status
+            </div>
+
+
+            <div class="current">
+
+                <span>
+                    Currently Serving
+                </span>
+
+                <span class="current-token"
+                      id="currentToken">
+
+                    A-001
+
+                </span>
+
+            </div>
+
+
+            <div class="progress-area">
+
+                <div class="progress-text">
+
+                    <span>
+                        Queue Progress
+                    </span>
+
+                    <span id="progressText">
+                        65%
+                    </span>
+
+                </div>
+
+                <div class="progress">
+
+                    <div class="progress-bar"
+                         id="progressBar">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="note">
+
+            🔔 <b>Stay nearby.</b>
+            We will notify you when your turn
+            is approaching.
+
+        </div>
+
+
+        <button class="blue-btn"
+                onclick="showHome()">
+
+            Done / Back to Home
+
+        </button>
+
+
+        <div class="footer">
+            Your time matters. SmartQueue saves it.
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ================================
+   SMART QUEUE SYSTEM
+   ================================ */
+
+
+/* Current queue token */
+
+let currentQueueNumber = 1;
+
+
+/* Last generated token */
+
+let lastTokenNumber =
+    localStorage.getItem("lastTokenNumber");
+
+
+if(lastTokenNumber){
+
+    lastTokenNumber =
+        parseInt(lastTokenNumber);
+
+}else{
+
+    lastTokenNumber = 0;
+
+}
+
+
+/* SHOW HOME */
+
+function showHome(){
+
+    document.getElementById("homeScreen")
+        .classList.remove("hidden");
+
+    document.getElementById("serviceScreen")
+        .classList.add("hidden");
+
+    document.getElementById("tokenScreen")
+        .classList.add("hidden");
+
+}
+
+
+/* SHOW SERVICE SCREEN */
+
+function showServiceScreen(){
+
+    document.getElementById("homeScreen")
+        .classList.add("hidden");
+
+    document.getElementById("serviceScreen")
+        .classList.remove("hidden");
+
+    document.getElementById("tokenScreen")
+        .classList.add("hidden");
+
+}
+
+
+/* GENERATE TOKEN */
+
+function generateToken(service){
+
+    /*
+       Increase token number
+       sequentially
+    */
+
+    lastTokenNumber++;
+
+    localStorage.setItem(
+        "lastTokenNumber",
+        lastTokenNumber
+    );
+
+
+    /*
+       Create token
+       Example:
+       A-001
+       A-002
+       A-003
+    */
+
+    let token =
+        "A-" +
+        String(lastTokenNumber)
+        .padStart(3,"0");
+
+
+    /*
+       Calculate people ahead
+    */
+
+    let peopleAhead =
+        Math.max(
+            0,
+            lastTokenNumber - currentQueueNumber
+        );
+
+
+    /*
+       Estimated waiting time
+       Assume 3 minutes per person
+    */
+
+    let waitingTime =
+        peopleAhead * 3;
+
+
+    /*
+       Save token information
+    */
+
+    localStorage.setItem(
+        "myToken",
+        token
+    );
+
+    localStorage.setItem(
+        "myService",
+        service
+    );
+
+
+    /*
+       Display token
+    */
+
+    document.getElementById(
+        "tokenNumber"
+    ).innerText = token;
+
+
+    document.getElementById(
+        "serviceName"
+    ).innerText = service;
+
+
+    document.getElementById(
+        "peopleAhead"
+    ).innerText = peopleAhead;
+
+
+    document.getElementById(
+        "waitTime"
+    ).innerText =
+        waitingTime + " min";
+
+
+    document.getElementById(
+        "currentToken"
+    ).innerText =
+        "A-" +
+        String(currentQueueNumber)
+        .padStart(3,"0");
+
+
+    /*
+       Calculate progress
+    */
+
+    let progress =
+        Math.min(
+            100,
+            Math.round(
+                (currentQueueNumber /
+                Math.max(
+                    lastTokenNumber,
+                    1
+                )) * 100
+            )
+        );
+
+
+    document.getElementById(
+        "progressBar"
+    ).style.width =
+        progress + "%";
+
+
+    document.getElementById(
+        "progressText"
+    ).innerText =
+        progress + "%";
+
+
+    /*
+       Show token screen
+    */
+
+    document.getElementById(
+        "homeScreen"
+    ).classList.add("hidden");
+
+
+    document.getElementById(
+        "serviceScreen"
+    ).classList.add("hidden");
+
+
+    document.getElementById(
+        "tokenScreen"
+    ).classList.remove("hidden");
+
+}
+
+
+/* ================================
+   LOAD SAVED TOKEN
+   ================================ */
+
+window.onload = function(){
+
+    let savedToken =
+        localStorage.getItem("myToken");
+
+    let savedService =
+        localStorage.getItem("myService");
+
+
+    if(savedToken){
+
+        document.getElementById(
+            "tokenNumber"
+        ).innerText =
+            savedToken;
+
+    }
+
+
+    if(savedService){
+
+        document.getElementById(
+            "serviceName"
+        ).innerText =
+            savedService;
+
+    }
+
+};
+
+</script>
+
+
+<script>
+let role = 'student';
+let adminCurrent = 1;
+let waiting = [];
+
+function switchRole(nextRole){
+  role = nextRole;
+  document.getElementById('studentTab').classList.toggle('active', nextRole==='student');
+  document.getElementById('adminTab').classList.toggle('active', nextRole==='admin');
+  document.getElementById('homeScreen').classList.toggle('hidden', nextRole!=='student');
+  document.getElementById('serviceScreen').classList.add('hidden');
+  document.getElementById('tokenScreen').classList.add('hidden');
+  document.getElementById('adminScreen').classList.toggle('hidden', nextRole!=='admin');
+  if(nextRole==='admin') renderAdmin();
+}
+
+function renderAdmin(){
+  const current = 'A-' + String(adminCurrent).padStart(3,'0');
+  const next = 'A-' + String(adminCurrent+1).padStart(3,'0');
+  document.getElementById('adminCurrent').textContent=current;
+  document.getElementById('adminNext').textContent=next;
+  document.getElementById('adminWaiting').textContent=waiting.length;
+  document.getElementById('adminToken').textContent=current;
+  document.getElementById('adminService').textContent =
+    waiting.length ? waiting[0].service : 'General Service';
+  document.getElementById('waitingList').innerHTML =
+    waiting.length ? waiting.map((x,i)=>`<div>🎫 <b>${x.token}</b> — ${x.service}</div>`).join('')
+                   : 'No students waiting yet.';
+}
+
+function adminCallNext(){
+  if(!waiting.length){ showToast('No students are waiting.'); return; }
+  const item = waiting.shift();
+  const num = parseInt(item.token.split('-')[1],10);
+  adminCurrent = num;
+  localStorage.setItem('currentQueueNumber', adminCurrent);
+  renderAdmin();
+  showToast(item.token + ' is now being served.');
+  if(localStorage.getItem('myToken')===item.token){
+    setTimeout(()=>showToast('🔔 Your turn is now! Please reach the counter.'),500);
+  }
+}
+
+function adminComplete(){
+  showToast('Current service marked as completed.');
+}
+
+function showToast(message){
+  const t=document.getElementById('toast');
+  t.textContent=message;
+  t.classList.add('show');
+  clearTimeout(window.__toast);
+  window.__toast=setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+/* Wrap the original token generator so every new token appears in Admin queue. */
+const originalGenerateToken = window.generateToken;
+window.generateToken = function(service){
+  originalGenerateToken(service);
+  const token = document.getElementById('tokenNumber').textContent;
+  waiting.push({token, service});
+  renderAdmin();
+
+  const ahead = parseInt(document.getElementById('peopleAhead').textContent,10) || 0;
+  if(ahead <= 3) setTimeout(()=>showToast('🔔 Your turn is approaching!'),350);
+};
+
+/* Persist the admin's current token if the original demo is refreshed. */
+const savedCurrent = parseInt(localStorage.getItem('currentQueueNumber') || '1',10);
+if(Number.isFinite(savedCurrent)) adminCurrent=savedCurrent;
+</script>
+
+</body>
+</html>
